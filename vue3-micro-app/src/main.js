@@ -4,7 +4,7 @@ import routes from './router'
 import './public-path'
 import { createRouter, createWebHistory } from 'vue-router'
 
-let router = null
+let router2 = null
 let instance = null
 
 function render() {
@@ -14,13 +14,18 @@ function render() {
     window.__POWERED_BY_QIANKUN__ ? '/vue3' : '/'
   )
 
-  router = createRouter({
+  router2 = createRouter({
     history,
     routes
   })
 
+  router2.afterEach((to, from) => {
+    console.log('from ', from)
+    console.log('to ', to)
+  })
+
   // 全局注册自定义组件
-  instance.use(router).mount('#vue3-micro-app')
+  instance.use(router2).mount('#vue3-micro-app')
 }
 
 if (!window.__POWERED_BY_QIANKUN__) {
@@ -43,5 +48,5 @@ export async function unmount() {
     instance._container.innerHTML = ''
     instance = null
   }
-  router = null
+  router2 = null
 }

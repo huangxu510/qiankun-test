@@ -23,6 +23,11 @@ function render() {
     routes
   })
 
+  router.afterEach((to, from) => {
+    console.log('from ', from)
+    console.log('to ', to)
+  })
+
   // 挂载应用
   instance = new Vue({
     router,
